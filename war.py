@@ -136,7 +136,6 @@ def get_parameters():
 
 # reading headers
 global data
-headers = open("headers.txt", "r")
 data = headers.read()
 headers.close()
 #task queue are q,w
